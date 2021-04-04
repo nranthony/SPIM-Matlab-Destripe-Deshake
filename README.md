@@ -33,7 +33,7 @@ Output tif files will have _ds, _regds, or _reg appended prior to .tif file exte
 ### Examples:
 Before and after in cleared neuronal tissue.
 
-![Before] (images/neurons_before.jpg)
+![Before] (./images/neurons_before.jpg)
 
 ![After] (images/neurons_after.jpg)
 
