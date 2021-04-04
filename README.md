@@ -32,8 +32,11 @@ Output tif files will have _ds, _regds, or _reg appended prior to .tif file exte
 
 ### Examples:
 Before and after in cleared neuronal tissue.
+
 ![Before] (/images/neurons_before.jpg)
+
 ![After] (/images/neurons_after.jpg)
 
 Deshake output showing offset in x and y throughout stack (below maxium pixel offset).
+
 ![Offsets] (/images/offsets.png)
