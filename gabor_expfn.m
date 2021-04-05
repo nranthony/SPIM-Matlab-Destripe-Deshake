@@ -1,17 +1,28 @@
-function gb=gabor_expfn(sigmax,sigmay)
-% simplified version of gabor_fn by P Weiss
-% removed periodic parameters and inverse sigma values
-% kept bounding box using cos(theta) = 0 and sin(theta) = 1
-% and rotation removed, x_theta -> y, and y_theta -> x
+function gb=gabor_expfn(sigma_x, sigma_y, theta)
+% editted version of gabor_fn by P Weiss
+% enter sigmas directly
+% input theta in degrees and conver to radians for matlab trig
+
+% convert to radians
+theta = deg2rad(theta+90);
+
+% just input sigmas
+% sigma_x = sigma/gammax;
+% sigma_y = sigma/gammay;
 
 % Bounding box
 nstds = 5;
-xmax = min(max(abs(0),abs(nstds*sigmay)),2000);
+xmax = min(max(abs(nstds*sigma_x*cos(theta)),abs(nstds*sigma_y*sin(theta))),2000);
 xmax = ceil(max(1,xmax));
-ymax = min(max(abs(nstds*sigmax),abs(0)),2000);
+ymax = min(max(abs(nstds*sigma_x*sin(theta)),abs(nstds*sigma_y*cos(theta))),2000);
 ymax = ceil(max(1,ymax));
 xmin = -xmax; ymin = -ymax;
 [x,y] = meshgrid(xmin:xmax,ymin:ymax);
+ 
+n=max(xmax,ymax);
 
-% Simplified Gabor function
-gb= 1/(2*pi*sigmax *sigmay) * exp(-.5*(y.^2/sigmax^2+x.^2/sigmay^2));
+% Rotation 
+x_theta=x*cos(theta)+y*sin(theta);
+y_theta=-x*sin(theta)+y*cos(theta);
+ 
+gb= 1/(2*pi*sigma_x *sigma_y) * exp(-.5*(x_theta.^2/sigma_x^2+y_theta.^2/sigma_y^2)).*cos(2*pi/n*x_theta);
